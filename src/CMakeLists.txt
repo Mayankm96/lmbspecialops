@@ -33,14 +33,14 @@ set( lz4_INCLUDE_DIR "${SOURCE_DIR}/lib" )
 set( lz4_STATIC_LIB ${BINARY_DIR}/cmake_unofficial/liblz4.a )
 
 
-find_package( PythonInterp REQUIRED )
+find_package( PythonInterp 3 REQUIRED )
 find_package( OpenMP REQUIRED )
 
 
 # retrieve tensorflow include dir and lib dir
-execute_process( COMMAND ${PYTHON_EXECUTABLE} "-c" "from __future__ import print_function; import tensorflow as tf; print(tf.sysconfig.get_include(), end='')" 
+execute_process( COMMAND ${PYTHON_EXECUTABLE} "-c" "from __future__ import print_function; import tensorflow as tf; print(tf.sysconfig.get_include(), end='')"
         OUTPUT_VARIABLE TENSORFLOW_INCLUDE_DIR )
-execute_process( COMMAND ${PYTHON_EXECUTABLE} "-c" "from __future__ import print_function; import tensorflow as tf; print(tf.sysconfig.get_lib(), end='')" 
+execute_process( COMMAND ${PYTHON_EXECUTABLE} "-c" "from __future__ import print_function; import tensorflow as tf; print(tf.sysconfig.get_lib(), end='')"
         OUTPUT_VARIABLE TENSORFLOW_LIB_DIR )
 find_library( TENSORFLOW_FRAMEWORK_LIB tensorflow_framework PATHS "${TENSORFLOW_LIB_DIR}" NO_DEFAULT_PATH )
 message( STATUS "${TENSORFLOW_INCLUDE_DIR}" )
@@ -61,7 +61,7 @@ file( GLOB lmbspecialops_SOURCES  *.cc *.c )
 file( GLOB lmbspecialops_CUSOURCES *.cu )
 
 
-include_directories( 
+include_directories(
     ${TENSORFLOW_INCLUDE_DIR}
     ${TENSORFLOW_INCLUDE_DIR}/external/nsync/public/  # fix nsync headers not found bug
         ${PROJECT_BINARY_DIR}/lib
@@ -80,9 +80,9 @@ set_target_properties( lmbspecialops PROPERTIES LINK_FLAGS "${OpenMP_CXX_FLAGS}"
 # use old ABI with gcc 5.x
 set_target_properties( lmbspecialops PROPERTIES COMPILE_DEFINITIONS "_GLIBCXX_USE_CXX11_ABI=0" )
 # enable c++11
-set_target_properties( lmbspecialops PROPERTIES 
-                CXX_STANDARD 11 
-                CXX_STANDARD_REQUIRED ON 
+set_target_properties( lmbspecialops PROPERTIES
+                CXX_STANDARD 11
+                CXX_STANDARD_REQUIRED ON
                 CXX_EXTENSIONS OFF)
 
 add_dependencies( lmbspecialops lz4 webp )

@@ -2,17 +2,17 @@
 //  lmbspecialops - a collection of tensorflow ops
 //  Copyright (C) 2017  Albert Ludwigs University of Freiburg, Pattern Recognition and Image Processing, Computer Vision Group
 //  Author(s): Lukas Voegtle <voegtlel@tf.uni-freiburg.de>
-//  
+//
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-//  
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -133,7 +133,7 @@ class DecodePpmOp : public OpKernel {
       OP_REQUIRES(context, false,
                   errors::InvalidArgument("Invalid PPM data size, data too small for PPM file"));
     }
-    if (!data.starts_with("P6")) {
+    if (data.substr(0, 2) != StringPiece("P6")) {
       OP_REQUIRES(context, false,
                   errors::InvalidArgument("Invalid PPM header, expected 'P6'"));
     }
@@ -225,4 +225,3 @@ class DecodePpmOp : public OpKernel {
   int desired_channel_bits_;
 };
 REGISTER_KERNEL_BUILDER(Name("DecodePpm").Device(DEVICE_CPU), DecodePpmOp);
-

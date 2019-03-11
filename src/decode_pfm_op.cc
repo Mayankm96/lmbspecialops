@@ -2,17 +2,17 @@
 //  lmbspecialops - a collection of tensorflow ops
 //  Copyright (C) 2017  Albert Ludwigs University of Freiburg, Pattern Recognition and Image Processing, Computer Vision Group
 //  Author(s): Lukas Voegtle <voegtlel@tf.uni-freiburg.de>
-//  
+//
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-//  
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -190,11 +190,11 @@ class DecodePfmOp : public OpKernel {
                   errors::InvalidArgument("Invalid PFM data size, data too small for PFM file"));
     }
     int channels = channels_;
-    if (data.starts_with("PF")) {
+    if (data.substr(0, 2) == StringPiece("PF")) {
         OP_REQUIRES(context, channels == 0 || channels == 3,
                       errors::InvalidArgument("File has 3 channels, but output has only 1"));
         channels = 3;
-    } else if (data.starts_with("Pf")) {
+    } else if (data.substr(0, 2) == StringPiece("Pf")) {
         OP_REQUIRES(context, channels == 0 || channels == 1,
                           errors::InvalidArgument("File has 1 channels, but output has 3"));
         channels = 1;
@@ -284,4 +284,3 @@ class DecodePfmOp : public OpKernel {
   int channels_;
 };
 REGISTER_KERNEL_BUILDER(Name("DecodePfm").Device(DEVICE_CPU), DecodePfmOp);
-
