@@ -1,3 +1,17 @@
+# Changes Made
+
+Modified `CMakeLists.txt` to build library on system with following specifications:
+* __OS Platform and Distribution:__ Linux Ubuntu 16.04LTS
+* __CUDA/cuDNN version:__ CUDA 9.0.176, cuDNN 7.1.4
+* __GPU model and memory:__ NVidia GeForce GTX 1070-MaxQ
+
+To solve the bug (reported [here](https://github.com/tensorflow/tensorflow/issues/10220)), you would need to install the following:
+```
+sudo apt-get install g++-4.9 gcc-4.9
+```
+
+---
+
 # lmbspecialops
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](LICENSE)
@@ -6,7 +20,7 @@ lmbspecialops is a collection of tensorflow ops.
 The ops focus on networks for predicting depth and camera motion as in DeMoN, but many can also be useful for other tasks.
 
 If you use this code for research please cite:
-   
+
     @InProceedings{UZUMIDB17,
       author       = "B. Ummenhofer and H. Zhou and J. Uhrig and N. Mayer and E. Ilg and A. Dosovitskiy and T. Brox",
       title        = "DeMoN: Depth and Motion Network for Learning Monocular Stereo",
@@ -65,7 +79,7 @@ make
 ```
 
 To use the ops, you need to add the ```lmbspecialops/python``` directory to your python path.
-Then you can import and use the ops like this 
+Then you can import and use the ops like this
 
 ```python
 import lmbspecialops
@@ -79,9 +93,9 @@ B = lmbspecialops.replace_nonfinite(A)
 print(B.eval()) # prints [1, 2, 0]
 ```
 
-    
 
-### Virtualenv build 
+
+### Virtualenv build
 
 To build inside a virtualenv make sure to activate the environment before
 running cmake.
@@ -95,4 +109,3 @@ for possible solutions.
 ## License
 
 lmbspecialops is under the [GNU General Public License v3.0](LICENSE.txt)
-
