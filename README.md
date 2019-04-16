@@ -5,11 +5,7 @@ Modified `CMakeLists.txt` to build library on system with following specificatio
 * __CUDA/cuDNN version:__ CUDA 9.0.176, cuDNN 7.1.4
 * __GPU model and memory:__ NVidia GeForce GTX 1070-MaxQ
 * __TensorFlow:__ 1.9.0
-
-To solve the bug (reported [here](https://github.com/tensorflow/tensorflow/issues/10220)), you would need to install the following:
-```
-sudo apt-get install g++-4.9 gcc-4.9
-```
+* __G++ Compliler:__ v5.4.0
 
 ---
 

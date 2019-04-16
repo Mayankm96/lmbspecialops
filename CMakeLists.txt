@@ -1,9 +1,5 @@
 cmake_minimum_required( VERSION 3.7.1 )
 
-# Set C++ language version
-set(CMAKE_C_COMPILER /usr/bin/gcc-4.9)
-set(CMAKE_CXX_COMPILER /usr/bin/g++-4.9)
-
 project(lmbspecialops)
 enable_testing()
 
